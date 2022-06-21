@@ -1,4 +1,5 @@
 ////////////////////////////////////////Variable\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 var content = document.getElementById('content');
 var top = document.getElementById('top');
 var table = document.getElementById('tablel');
@@ -7,9 +8,11 @@ graphCanvas.setAttribute('iod', graphId);
 graphCanvas.setAttribute('width', graphWidth);
 graphCanvas.setAttribute('height', graphHeight);
 var canvas = table.insertBefore(graphCanvas, table);
+
 ///////////////////////////////////////Fonction\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 //////////////////////////////////////////////Graphique\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 const config = {
   type: 'line',
   data: data,
