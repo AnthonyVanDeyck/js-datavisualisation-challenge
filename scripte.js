@@ -1,7 +1,7 @@
 ////////////////////////////////////////Variable\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 var content = document.getElementById('content');
 var top = document.getElementById('top');
-var table = document.getElementById('tabel');
+var table = document.getElementById('tablel');
 var graphCanvas = document.createAttribute('canvas');
 graphCanvas.setAttribute('iod', graphId);
 graphCanvas.setAttribute('width', graphWidth);
