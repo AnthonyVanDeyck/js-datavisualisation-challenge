@@ -7,12 +7,12 @@ var graphCanvas = document.createAttribute('canvas');
 graphCanvas.setAttribute('iod', graphId);
 graphCanvas.setAttribute('width', graphWidth);
 graphCanvas.setAttribute('height', graphHeight);
-var canvas = table.insertBefore(graphCanvas, table);
+table.insertBefore(graphCanvas, table);
 
 ///////////////////////////////////////Fonction\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 //////////////////////////////////////////////Graphique\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
+/*
 const config = {
   type: 'line',
   data: data,
@@ -111,4 +111,6 @@ const actions = [
     }
   }
 ];
+
+*/
 ////////////////////////////////////////////Code\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
