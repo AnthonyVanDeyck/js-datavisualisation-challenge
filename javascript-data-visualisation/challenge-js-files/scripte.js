@@ -6,19 +6,50 @@ graphCanvas.setAttribute('id', 'graphId');
 graphCanvas.setAttribute('width', '400px');
 graphCanvas.setAttribute('height', '200px');
 table.before(graphCanvas);
+const tableau = Array.from(table.querySelectorAll('tbody > tr'));
+var annee = tableau[0].querySelectorAll('th');
+var data_value =[];
+var data_annee = [];
+//console.log(annee)
+Annee();
+Data();
 
 ///////////////////////////////////////Fonction\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+function Annee()
+{
+ 
+  var i = 2;
+  var j = 0;
+
+  while(i < annee.length)
+  {
+    if(isNaN(annee[i]))
+    {
+    data_annee[j] = annee[i].textContent;
+    }
+    i++;
+    j++;
+  }
+
+}
+
+function Data()
+{
+
+  var i;
+  for(i = 1; i < tableau.length; i++)
+  {
+    var dataa = tableau[i].querySelectorAll('td');
+
+    data_value[i] = dataa[i];
+
+    console.log(dataa);
+  }
+}
 //////////////////////////////////////////////Graphique\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-  ];
+  const labels = data_annee;
 
   const data = {
     labels: labels,
@@ -26,7 +57,7 @@ table.before(graphCanvas);
       label: 'My First dataset',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45],
+      data: [],
     }]
   };
 
