@@ -8,11 +8,11 @@ graphCanvas.setAttribute('height', '200px');
 table.before(graphCanvas);
 const tableau = Array.from(table.querySelectorAll('tbody > tr'));
 var annee = tableau[0].querySelectorAll('th');
-var data_value =[];
+var data_value = {};
+var pays = ' ';
+var array = []
 var data_annee = [];
 //console.log(annee)
-Annee();
-Data();
 
 ///////////////////////////////////////Fonction\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -37,15 +37,24 @@ function Annee()
 function Data()
 {
 
-  var i;
-  for(i = 1; i < tableau.length; i++)
+  for(i = 1; i < tableau.length && j < tableau.length; i++)
   {
-    var dataa = tableau[i].querySelectorAll('td');
-
+    var dataa = tableau[j].querySelectorAll('td');
+    
     data_value[i] = dataa[i];
-
-    console.log(dataa);
+    j++;
   }
+  /*
+  tableau.forEach(tr => {
+    tr.querySelectorAll('td').forEach(td => {
+      if(!isNaN(td.innerHTML[0])){
+        array.push(parseInt(td.textContent))
+      }
+    })
+  })
+  console.log(array);
+  */
+//  console.log(dataa);
 }
 //////////////////////////////////////////////Graphique\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -54,10 +63,10 @@ function Data()
   const data = {
     labels: labels,
     datasets: [{
-      label: 'My First dataset',
+      label: '',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
-      data: [],
+      data: array,
     }]
   };
 
@@ -73,3 +82,6 @@ function Data()
   );
 
 ////////////////////////////////////////////Code\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+Annee();
+Data();
