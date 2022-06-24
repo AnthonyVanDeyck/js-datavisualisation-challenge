@@ -2,6 +2,7 @@
 
 var table = document.getElementById('table1');
 var table2 = document.getElementById('table2');
+var h1 = document.getElementById('firstHeading');
 var graphCanvas = document.createElement('canvas');
 graphCanvas.setAttribute('id', 'graphId');
 // graphCanvas.setAttribute('width', '400px');
@@ -10,6 +11,9 @@ table.before(graphCanvas);
 var graphCanvas2 = document.createElement('canvas');
 graphCanvas2.setAttribute('id', 'graphId2');
 table2.before(graphCanvas2);
+var graphCanvas3 = document.createElement('canvas');
+graphCanvas3.setAttribute('id', 'graphId3');
+h1.after(graphCanvas3);
 const tableau = Array.from(table.querySelectorAll('tbody > tr'));
 var annee = tableau[0].querySelectorAll('th');
 var perlinpinpin = document.querySelectorAll('#table1 td');
@@ -93,8 +97,8 @@ var pays2 ='';
       data_value2[pays2].push(value2);
     }
   }
-  console.log(data_value2);
 
+  //  console.log(data_value2);
 
 //////////////////////////////////////////////Graphique 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -173,4 +177,64 @@ const myChart2 = new Chart(ctx2, {
       }}},
 });
 
-////////////////////////////////////////////Code\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+////////////////////////////////////////////graph 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+ function updateChart() {
+   $.getJSON("https://canvasjs.com/services/data/datapoints.php" + (dataPoints.length + 1) + "&ystart=" + (dataPoints[dataPoints.length - 1].y) + "&length=1&type=json", function(data) {
+       $.each(data, function(key, value) {
+           dataPoints.push({
+               x: parseInt(value[0]),
+               y: parseInt(value[1])
+           });
+      });
+      chart.render();
+      setTimeout(function(){updateChart()}, 1000);
+   });
+}
+
+var dataPoints = [];
+$.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=10&type=json", function(data) {  
+    $.each(data, function(key, value){
+        dataPoints.push({x: value[0], y: parseInt(value[1])});
+    });
+    chart = new CanvasJS.Chart("graphId3",{
+        title:{
+            text:"Live Chart with dataPoints from External JSON"
+        },
+        data: [{
+        type: "line",
+        dataPoints : dataPoints,
+        }]
+    });
+    chart.render();
+    updateChart();
+});
+
+
+/* var lien = new XMLHttpRequest();
+lien.open('get', 'https://canvasjs.com/services/data/datapoints.php');
+lien.onreadystatechange = function() {
+  if (lien.readyState === 4) {
+    alert(lien.responseText);
+  }
+};
+lien.send(); */
+
+const ctx3 = document.getElementById('graphId3').getContext('2d');
+const myChart3 = new Chart(ctx3, {
+    type: 'line',
+    data: {
+        labels: dataPoints,
+        datasets: [{
+            label: 'test',
+            data: dataPoints,
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
