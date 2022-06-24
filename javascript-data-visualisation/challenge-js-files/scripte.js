@@ -79,11 +79,10 @@ var pays2 ='';
     b++;
   }
 
-    for(c = 0; c < perlinpinpin.length; c++)
+    for(c = 0; c < data2.length; c++)
   {
     const Pays2 = data2[c].textContent;
     const value2 = parseFloat(Pays2);
-    console.log(data_value2);
     if(isNaN(value2))
     {
       pays2 = Pays2;
@@ -94,6 +93,7 @@ var pays2 ='';
       data_value2[pays2].push(value2);
     }
   }
+  console.log(data_value2);
 
 
 //////////////////////////////////////////////Graphique 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -138,33 +138,39 @@ const myChart = new Chart(ctx, {
 
 ////////////////////////////////////////////graph2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+const labels2 = data_annee2;
 const ctx2 = document.getElementById('graphId2').getContext('2d');
+  const CountryList2 = Object.keys(data_value2)
+
+  let DataArray2 = [] 
+
+  for(i=0; i<CountryList2.length; i++){ 
+  const countryName = CountryList2[i];
+  var randomColor = Math.floor(Math.random()*16777215).toString(16);
+
+  const data = {
+ //     label: '',
+ //     backgroundColor: 'rgb(255, 99, 132)',
+ //     borderColor: 'rgb(255, 99, 132)',
+ //     data: data_value,
+        label: countryName,
+        data: data_value2[countryName],
+        backgroundColor : "#" + randomColor,
+        borderColor : "#" + randomColor
+  };
+  DataArray2.push(data)
+}
 const myChart2 = new Chart(ctx2, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: 'My First Dataset',
-          data: [65, 59, 90, 81, 56, 55, 40],
-          fill: true,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgb(255, 99, 132)',
-          pointBackgroundColor: 'rgb(255, 99, 132)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(255, 99, 132)'
-            }, {
-          label: 'My Second Dataset',
-          data: [28, 48, 40, 19, 96, 27, 100],
-          fill: true,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgb(54, 162, 235)',
-          pointBackgroundColor: 'rgb(54, 162, 235)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(54, 162, 235)'
-            }]
+      labels: labels2,
+      datasets: DataArray2
           },
+                options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }}},
 });
 
 ////////////////////////////////////////////Code\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
