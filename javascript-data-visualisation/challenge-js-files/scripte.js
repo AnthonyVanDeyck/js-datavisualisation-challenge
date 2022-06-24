@@ -1,11 +1,15 @@
 ////////////////////////////////////////Variable\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 var table = document.getElementById('table1');
+var table2 = document.getElementById('table2');
 var graphCanvas = document.createElement('canvas');
 graphCanvas.setAttribute('id', 'graphId');
 // graphCanvas.setAttribute('width', '400px');
 // graphCanvas.setAttribute('height', '200px');
 table.before(graphCanvas);
+var graphCanvas2 = document.createElement('canvas');
+graphCanvas2.setAttribute('id', 'graphId2');
+table2.before(graphCanvas2);
 const tableau = Array.from(table.querySelectorAll('tbody > tr'));
 var annee = tableau[0].querySelectorAll('th');
 var perlinpinpin = document.querySelectorAll('#table1 td');
@@ -13,6 +17,11 @@ var data_value = {};
 var pays = '';
 // var array = []
 var data_annee = [];
+var annee2 = document.querySelectorAll('thead > tr > th');
+var data_annee2 = [];
+var data2 = document.querySelectorAll('#table2 td');
+var data_value2 ={};
+var pays2 ='';
 //console.log(annee)
 
 ///////////////////////////////////////Fonction\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -45,7 +54,7 @@ var data_annee = [];
       data_value[pays].push(value);
     }
   }
-  console.log(data_value);
+//  console.log(data_value);
   /*
   tableau.forEach(tr => {
     tr.querySelectorAll('td').forEach(td => {
@@ -56,6 +65,36 @@ var data_annee = [];
   })
   console.log(array);
   */
+
+  var a = 5;
+  var b = 0;
+
+  while(a < annee2.length)
+  {
+    if(isNaN(annee2[a]))
+    {
+    data_annee2[b] = annee2[a].textContent;
+    }
+    a++;
+    b++;
+  }
+
+    for(c = 0; c < perlinpinpin.length; c++)
+  {
+    const Pays2 = data2[c].textContent;
+    const value2 = parseFloat(Pays2);
+    console.log(data_value2);
+    if(isNaN(value2))
+    {
+      pays2 = Pays2;
+      data_value2[pays2]= [];
+    }
+    else if(!isNaN(value2))
+    {
+      data_value2[pays2].push(value2);
+    }
+  }
+
 
 //////////////////////////////////////////////Graphique 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -97,7 +136,35 @@ const myChart = new Chart(ctx, {
     }
 });
 
-////////////////////////////////////////////Code\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+////////////////////////////////////////////graph2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-//Annee();
-//Data();
+const ctx2 = document.getElementById('graphId2').getContext('2d');
+const myChart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: 'My First Dataset',
+          data: [65, 59, 90, 81, 56, 55, 40],
+          fill: true,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgb(255, 99, 132)',
+          pointBackgroundColor: 'rgb(255, 99, 132)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgb(255, 99, 132)'
+            }, {
+          label: 'My Second Dataset',
+          data: [28, 48, 40, 19, 96, 27, 100],
+          fill: true,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgb(54, 162, 235)',
+          pointBackgroundColor: 'rgb(54, 162, 235)',
+          pointBorderColor: '#fff',
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: 'rgb(54, 162, 235)'
+            }]
+          },
+});
+
+////////////////////////////////////////////Code\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
