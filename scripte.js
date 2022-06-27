@@ -226,8 +226,10 @@ const myChart3 = new Chart(ctx3, {
     data: {
         labels: dataPoints,
         datasets: [{
-            label: 'test',
+            label: 'data',
             data: dataPoints,
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
         }]
     },
     options: {
